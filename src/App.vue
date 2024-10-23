@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import Counter from './components/Counter.vue';
+import Tests from './components/Tests.vue';
 </script>
 
 <template>
+<!---
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
@@ -19,8 +20,8 @@ import Counter from './components/Counter.vue';
   </header>
 
   <RouterView />
-  
-  <Counter/>
+-->  
+  <Tests/>
 </template>
 
 <style scoped>
