@@ -1,37 +1,21 @@
 <template>
-    <div id="counter">
-      <button @click="increment">
-        Count is: {{ count }}
-      </button>
-    </div>
-    <div>
-      <p>Has published books:</p>
-      <span>{{ publishedBooksMessage }}</span>
-    </div>
-  </template>
+  <div id="counter">
+    <button :style="styleButton" @click="increment">
+    Count is: {{ count }}
+    </button>
+  </div>
+  <div>
+    <p>Has published books:</p>
+    <span>{{ publishedBooksMessage }}</span>
+  </div>
+  <div>
+    <label for="name">Enter your name (ex: John Doe):</label>
+    <input type="text" id="name" maxlength="40" v-model="nameInput"/>
+    <button :style="styleButton" @click="updateName">Submit</button>
+    <p>Welcome {{ fullName }} !</p>
+  </div>
+</template>
   
-  <!-- regular way to manually expose states and methods via setup()
-
-  <script>
-  import { ref } from 'vue'
-  
-  export default {
-    setup() {
-      const count = ref(0)
-
-      function increment() {
-        count.value++
-      }
-
-      return { 
-        count,
-        increment
-       }
-    },
-  };
-  </script>
--->
-
 <script setup>
 import { ref, reactive, computed } from 'vue'
 
@@ -70,8 +54,46 @@ const fullName = computed({
     [firstName.value, lastName.value] = newValue.split(' ')
   }
 })
+
+const nameInput = ref(null)
+function updateName() {
+  fullName.value = nameInput.value
+}
+
+const styleButton = reactive ({
+  backgroundColor: '#7e7e7e',
+  color: 'white',
+  border: 'none',
+  padding: '10px 20px',
+  borderRadius: '5px',
+  fontSize: '16px',
+  cursor: 'pointer',
+  transition: 'background-color 0.3s ease, transform 0.2s ease'
+})
 </script>
 
+
+  <!-- regular way to manually expose states and methods via setup()
+
+  <script>
+  import { ref } from 'vue'
+  
+  export default {
+    setup() {
+      const count = ref(0)
+
+      function increment() {
+        count.value++
+      }
+
+      return { 
+        count,
+        increment
+       }
+    },
+  };
+  </script>
+-->
 
   
   <style scoped>

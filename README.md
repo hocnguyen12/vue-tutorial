@@ -53,6 +53,50 @@ npm run build
     `reactive()`
 - Computed Properties
 
+- Class and Style bindings
+    Dynamically assign html classes `<div :class="{ active: isActive }"></div>` (uses `v-bind:class`) the div has the active class depending on the boolean `isActive`. 
+- Conditional Rendering
+    `v-if`, `v-else`, `v-else-if`, `v=show`
+    Example: 
+    ```vue.js
+    <button @click="awesome = !awesome">Toggle</button>
+    <h1 v-if="awesome">Vue is awesome!</h1>
+    <h1 v-else>Oh no 😢</h1>
+    ``` 
+    "Generally speaking, v-if has higher toggle costs while v-show has higher initial render costs. So prefer v-show if you need to toggle something very often, and prefer v-if if the condition is unlikely to change at runtime."
+- List Rendering
+    `v-for`
+    Example:
+    ```vue.js
+    <li v-for="({ message }, index) in items">
+        {{ message }} {{ index }}
+    </li>
+    <li v-for="item in items">
+        <span v-for="childItem in item.children">
+            {{ item.message }} {{ childItem }}
+        </span>
+    </li>
+    ```
+    Important : Maintaining State with key
+    ```vue.js
+    <div v-for="item in items" :key="item.id">
+        <!-- content -->
+    </div>
+    ```​
+    "It is recommended to provide a key attribute with v-for whenever possible, unless the iterated DOM content is simple (i.e. contains no components or stateful DOM elements), or you are intentionally relying on the default behavior for performance gains.
+    The key binding expects primitive values - i.e. strings and numbers. Do not use objects as v-for keys. For detailed usage of the key attribute, please see the key API documentation."
+
+    `v-for` with a component :
+    ```vue.js
+    <MyComponent
+    v-for="(item, index) in items"
+    :item="item"
+    :index="index"
+    :key="item.id"
+    />
+    ```
+- Event Handling
+
 
 ### Good practices
 **Security Warning** :
@@ -72,6 +116,14 @@ console.log(proxy === raw) // false
 ```
 
 Only the proxy is reactive - mutating the original object will not trigger updates. Therefore, the best practice when working with Vue's reactivity system is to exclusively use the proxied versions of your state.
+
+**List Rendering**
+Be careful with reverse() and sort() in a computed property! These two methods will mutate the original array, which should be avoided in computed getters. Create a copy of the original array before calling these methods:
+diff
+```
+- return numbers.reverse()
++ return [...numbers].reverse()
+```
 
 ### Computed properties
 
