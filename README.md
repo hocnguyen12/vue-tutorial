@@ -96,6 +96,21 @@ npm run build
     />
     ```
 - Event Handling
+    Handlers and Event Modifiers
+
+    see `https://vuejs.org/guide/essentials/event-handling.html`
+
+    Key Modifiers
+    ```vue.js
+    <!-- Alt + Enter -->
+    <input @keyup.alt.enter="clear" />
+
+    <!-- Ctrl + Click -->
+    <div @click.ctrl="doSomething">Do something</div>
+    ```
+- Form Input Bindings
+    Modify page depending on different form interactions (checkbox, text input, drop-down menu)
+- Lifecycle Hooks
 
 
 ### Good practices

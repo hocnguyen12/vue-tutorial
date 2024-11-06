@@ -10,7 +10,7 @@
   </div>
   <div>
     <label for="name">Enter your name (ex: John Doe):</label>
-    <input type="text" id="name" maxlength="40" v-model="nameInput"/>
+    <input @keyup.enter="updateName" type="text" id="name" maxlength="40" v-model="nameInput" placeholder="firstname lastname"/>
     <button :style="styleButton" @click="updateName">Submit</button>
     <p>Welcome {{ fullName }} !</p>
   </div>
